@@ -77,6 +77,22 @@ config['solr'] = 'http://localhost:8983/solr/'
 # Solr core
 config['index'] = 'opensemanticsearch'
 
+# Optional multi source classification sync
+#
+# If enabled (only used if a classification contribution is passed), several
+# ETL sources can classify the same document: each source sends the full tag
+# list of its latest version and an empty list to retract. The exporter keeps
+# one contribution per document, source and version, and the query field holds
+# the de-duplicated union of all sources, so retracting one source keeps the
+# tags still provided by other sources.
+#
+# Query facing field (union of the tags of all sources)
+#config['classification_query_field'] = 'classification_tags_ss'
+# Internal field with version and tags per source
+#config['classification_state_field'] = 'classification_source_ss'
+# Read-recompute-write attempts on concurrent updates
+#config['classification_retries'] = 5
+
 
 #
 # Elastic Search
